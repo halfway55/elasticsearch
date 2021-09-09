@@ -1,7 +1,37 @@
 Exercise 1
 
-ES version: 5.x
-Instance type: t2.small
+1. Create Opensearch(Elasticsearch) cluster with bellow spec
+```
+ES version: 7.10
+Instance type: t2.medium.search
 EBS:10GB
 Number of nodes:1
-Also, set up error logs for the cluster in the AWS ES console.
+```
+Set up [error logs](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createdomain-configure-slow-logs.html) for the cluster in the AWS ES console.
+
+
+2. Download elasticsearch stress test script
+```
+$ sudo yum install git
+$ git clone https://github.com/logzio/elasticsearch-stress-test.git
+```
+You should be running python 2.7+
+
+```
+$ sudo yum install python-pip
+$ sudo pip install elasticsearch==7.13.1
+```
+You should use elasticsearch client < 7.14 as there is a version [break point](https://github.com/elastic/elasticsearch-ruby/issues/1429)
+
+3. Run below command: This is just to push some documents to Elasticsearch cluster continuously. Please replace domain endpoint with your own domain endpoint.
+```
+for i in {1..10}; do python ~/elasticsearch-stress-test/elasticsearch-stress-test.py --es_address https://search-demo-cluster-1-765gtptpper6h3iajfukaj3yhy.us-east-1.es.amazonaws.com --indices 1 --documents 100 --clients 5 --seconds 300 --number-of-shards 1 --number-of-replicas 0 --bulk-size 5000 --max-fields-per-document 10 --max-size-per-field 700 --no-cleanup --stats-frequency 15 --no-verify --not-green; done;
+```
+Note: If cluster is yellow, you should specify --not-green in the command. Also, you may have to run the script multiple times to hit the free storage water mark.
+
+1. Monitor cluster health with the help of K2 script and other ES APIs
+1. Check when you are getting index_create_block_exception
+1. How can you check cluster index write block using Elasticsearch APIs?
+1. which log you will analyze to see the issue if you are the customer?
+
+Note: The block may not be removed quickly
