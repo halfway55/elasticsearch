@@ -12,14 +12,18 @@ Set up [error logs](https://docs.aws.amazon.com/opensearch-service/latest/develo
 
 2. Download elasticsearch stress test script
 ```
-$ sudo yum install git -y
-$ git clone https://github.com/logzio/elasticsearch-stress-test.git
+sudo yum install git -y
+```
+```
+git clone https://github.com/logzio/elasticsearch-stress-test.git
 ```
 You should be running python 2.7+
 
 ```
-$ sudo yum install python-pip -y
-$ sudo pip install elasticsearch==7.13.1
+sudo yum install python-pip -y
+```
+```
+sudo pip install elasticsearch==7.13.1
 ```
 You should use elasticsearch client < 7.14 as there is a version [break point](https://github.com/elastic/elasticsearch-ruby/issues/1429)
 
