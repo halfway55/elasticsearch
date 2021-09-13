@@ -36,3 +36,8 @@ Note: If cluster is yellow, you should specify --not-green in the command. Also,
 1. which log you will analyze to see the issue if you are the customer?
 
 Note: The block may not be removed quickly
+
+Clean up test index
+```
+DELETE *,-.kibana_1
+```
