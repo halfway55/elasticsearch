@@ -15,6 +15,6 @@ while true; do curl -XPOST  'https://search-demo-cluster-1-765gtptpper6h3iajfuka
 ```
 
 * How you will monitor the bulk queue
-* What API can help us check the thredpool
+* What API can help us check the threadpool
 * What suggestion will you give base on this
 
